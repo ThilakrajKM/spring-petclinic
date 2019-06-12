@@ -5,10 +5,12 @@ node {
     }
 	
 	stage('Build') {
-	
+		echo "Build"
     }
 
     stage('Archive') {
+		echo "Archive"
+
     }
     
     stage('Publish Status'){
