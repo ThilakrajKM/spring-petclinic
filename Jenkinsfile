@@ -5,9 +5,11 @@ node {
     }
 	
 	stage('Build') {
+		echo "Build"
     }
 
     stage('Archive') {
+		echo "Archive"
     }
 
 }
