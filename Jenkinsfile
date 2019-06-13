@@ -33,6 +33,7 @@ pipeline{
     post {
 		success{
 			//sendMail('All Stages Executed SucessFully')
+                        echo "Sucess"
 		}
 	}  
 }
