@@ -1,31 +1,36 @@
 pipeline {
 	agent any
+        
+        githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit looks good',  status: 'PENDING', 
+                          credentialsId: "Githubuserpwd", repo: 'spring-petclinic', account: "${GITHUB_PR_SOURCE_REPO_OWNER}", sha: "${GITHUB_PR_HEAD_SHA}"
   
-    tools {
+        tools {
 		maven 'MAVEN_HOME'
 		jdk 'JAVA_HOME'
 	}
   
 	stages {
 		stage('Clean Workspace') {
-		  steps {
-			sh 'git clean -fdx'
-		  }
+                          steps {
+                                sh 'git clean -fdx'
+                          }
 		}
 		stage('Build') {
-		  steps {
-			sh 'mvn clean package -DskipTests=true'
-		  }
+                          steps {
+                                sh 'mvn clean package -DskipTests=true'
+                          }
 		}
 		
 	}
 
 	post {
-        success {
-          githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit looks good',  status: 'SUCCESS'
-        }
-        failure {
-          githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit cannot be built',  status: 'FAILURE'
-        }
+                success {
+                        githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit looks good',  status: 'SUCCESS', 
+                                credentialsId: "Githubuserpwd", repo: 'spring-petclinic', account: "${GITHUB_PR_SOURCE_REPO_OWNER}", sha: "${GITHUB_PR_HEAD_SHA}"
+                }
+                failure {
+                        githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit cannot be built',  status: 'FAILURE',
+                                credentialsId: "Githubuserpwd", repo: 'spring-petclinic', account: "${GITHUB_PR_SOURCE_REPO_OWNER}", sha: "${GITHUB_PR_HEAD_SHA}"
+                }
 	}
 }
