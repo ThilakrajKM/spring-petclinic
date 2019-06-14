@@ -1,8 +1,8 @@
 pipeline {
 	agent any
         
-        githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit looks good',  status: 'PENDING', 
-                          credentialsId: "Githubuserpwd", repo: 'spring-petclinic', account: "${GITHUB_PR_SOURCE_REPO_OWNER}", sha: "${GITHUB_PR_HEAD_SHA}"
+        /*githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit looks good',  status: 'PENDING', 
+                          credentialsId: "Githubuserpwd", repo: 'spring-petclinic', account: "${GITHUB_PR_SOURCE_REPO_OWNER}", sha: "${GITHUB_PR_HEAD_SHA}"*/
   
         tools {
 		maven 'MAVEN_HOME'
