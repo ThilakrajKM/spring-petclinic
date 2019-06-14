@@ -25,7 +25,7 @@ pipeline {
           githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit looks good',  status: 'SUCCESS'
         }
         failure {
-          githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit cannot be built',  status: 'FAILED'
+          githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit cannot be built',  status: 'FAILURE'
         }
 	}
 }
