@@ -30,16 +30,12 @@ pipeline {
 
 	post {
                 success {
-                        script{
                         githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit looks good',  status: 'SUCCESS', 
                                 credentialsId: 'Githubuserpwd', repo: 'spring-petclinic', account: 'ThilakrajKM', sha: ${env.GIT_COMMIT}
-                        }
                 }
                 failure {
-                        script{
                         githubNotify gitApiUrl: 'https://github.com/api/v3', context: 'something test', description: 'This commit cannot be built',  status: 'FAILURE',
                                 credentialsId: 'Githubuserpwd', repo: 'spring-petclinic', account: 'ThilakrajKM', sha: ${env.GIT_COMMIT}
-                        }
                 }
 	}
 }
