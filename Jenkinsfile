@@ -17,6 +17,7 @@ pipeline {
                                   script{
                                        def scmVars = checkout scm
                                        env.GIT_COMMIT = scmVars.GIT_COMMIT
+                                          echo "${scmVars}"
                                   }
                           }
 		}
