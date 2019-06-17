@@ -17,6 +17,7 @@ pipeline {
                                   script{
                                        def scmVars = checkout scm
                                        env.GIT_COMMIT = scmVars.GIT_COMMIT
+                                       env.GIT_BRANCH = scmVars.GIT_BRANCH
                                        echo "${scmVars}"
                                        echo "********************************"
                                        echo "${env}"
@@ -41,7 +42,7 @@ pipeline {
 
                                 def result = 'success'
                                 def deployStatusBody = '{"state": "' + result + '","target_url": "http://github.com/deploymentlogs"}'
-                                def deployStatusURL = "https://api.github.com/repos/${owner}/${repo}/statuses/${ref}"
+                                def deployStatusURL = "http://localhost:8080/job/Test_Spring/job/${branchName}/${BUILD_NUMBER}"
                                 def deployStatusResponse = httpRequest authentication: 'Githubuserpwd', httpMode: 'POST', requestBody: deployStatusBody , responseHandle: 'STRING', url: deployStatusURL, ignoreSslErrors: 'true'
                                 if(deployStatusResponse.status != 201) {
                                         error("Deployment Status API Update Failed: " + deployStatusResponse.status)
@@ -57,7 +58,7 @@ pipeline {
 
                                 def result = 'success'
                                 def deployStatusBody = '{"state": "' + result + '","target_url": "http://github.com/deploymentlogs"}'
-                                def deployStatusURL = "https://api.github.com/repos/${owner}/${repo}/statuses/${ref}"
+                                def deployStatusURL = "http://localhost:8080/job/Test_Spring/job/${branchName}/${BUILD_NUMBER}"
                                 def deployStatusResponse = httpRequest authentication: 'Githubuserpwd', httpMode: 'POST', requestBody: deployStatusBody , responseHandle: 'STRING', url: deployStatusURL, ignoreSslErrors: 'true'
                                 if(deployStatusResponse.status != 201) {
                                         error("Deployment Status API Update Failed: " + deployStatusResponse.status)
