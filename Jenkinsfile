@@ -39,7 +39,7 @@ pipeline {
                                 def ref = env.GIT_COMMIT
                                 def owner = "ThilakrajKM"
                                 def repo = "spring-petclinic"
-
+                                def branchName = env.GIT_BRANCH
                                 def result = 'success'
                                 def deployStatusBody = '{"state": "' + result + '","target_url": "http://github.com/deploymentlogs"}'
                                 def deployStatusURL = "http://localhost:8080/job/Test_Spring/job/${branchName}/${BUILD_NUMBER}"
@@ -55,8 +55,8 @@ pipeline {
                                 def ref = env.GIT_COMMIT
                                 def owner = "ThilakrajKM"
                                 def repo = "spring-petclinic"
-
-                                def result = 'success'
+                                def branchName = env.GIT_BRANCH
+                                def result = 'failure'
                                 def deployStatusBody = '{"state": "' + result + '","target_url": "http://github.com/deploymentlogs"}'
                                 def deployStatusURL = "http://localhost:8080/job/Test_Spring/job/${branchName}/${BUILD_NUMBER}"
                                 def deployStatusResponse = httpRequest authentication: 'Githubuserpwd', httpMode: 'POST', requestBody: deployStatusBody , responseHandle: 'STRING', url: deployStatusURL, ignoreSslErrors: 'true'
