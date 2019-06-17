@@ -29,6 +29,7 @@ pipeline {
 	}
 
 	post {
+                //need to create a function
                 success {
                         script {
                                 def ref = env.GIT_COMMIT
