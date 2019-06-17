@@ -41,8 +41,8 @@ pipeline {
                                 def repo = "spring-petclinic"
                                 def branchName = env.GIT_BRANCH
                                 def result = 'success'
-                                def deployStatusBody = '{"state": "' + result + '","target_url": "http://github.com/deploymentlogs"}'
-                                def deployStatusURL = "http://localhost:8080/job/Test_Spring/job/${branchName}/${BUILD_NUMBER}"
+                                def deployStatusBody = '{"state": "' + result + '","target_url": "http://localhost:8080/job/Test_Spring/job/${branchName}/${BUILD_NUMBER}"}'
+                                def deployStatusURL = "https://api.github.com/repos/${owner}/${repo}/statuses/${ref}"
                                 def deployStatusResponse = httpRequest authentication: 'Githubuserpwd', httpMode: 'POST', requestBody: deployStatusBody , responseHandle: 'STRING', url: deployStatusURL, ignoreSslErrors: 'true'
                                 if(deployStatusResponse.status != 201) {
                                         error("Deployment Status API Update Failed: " + deployStatusResponse.status)
@@ -57,8 +57,8 @@ pipeline {
                                 def repo = "spring-petclinic"
                                 def branchName = env.GIT_BRANCH
                                 def result = 'failure'
-                                def deployStatusBody = '{"state": "' + result + '","target_url": "http://github.com/deploymentlogs"}'
-                                def deployStatusURL = "http://localhost:8080/job/Test_Spring/job/${branchName}/${BUILD_NUMBER}"
+                                def deployStatusBody = '{"state": "' + result + '","target_url": "http://localhost:8080/job/Test_Spring/job/${branchName}/${BUILD_NUMBER}"}'
+                                def deployStatusURL = "https://api.github.com/repos/${owner}/${repo}/statuses/${ref}"
                                 def deployStatusResponse = httpRequest authentication: 'Githubuserpwd', httpMode: 'POST', requestBody: deployStatusBody , responseHandle: 'STRING', url: deployStatusURL, ignoreSslErrors: 'true'
                                 if(deployStatusResponse.status != 201) {
                                         error("Deployment Status API Update Failed: " + deployStatusResponse.status)
