@@ -34,18 +34,12 @@ pipeline {
 	post {
                 success {
                         script {
-                                curl "https://api.github.com/ThilakrajKM/spring-petclinic/statuses/$env.GIT_COMMIT?access_token=91affb85754203f7b796820a995e1540292bce1e" \
-                                  -H "Content-Type: application/json" \
-                                  -X POST \
-                                  -d "{\"state\": \"success\", \"description\": \"Jenkins\", \"target_url\": \"http://10.131.155.89:8080\"}"
+                                curl -k "https://api.github.com/ThilakrajKM/spring-petclinic/statuses/$env.GIT_COMMIT?access_token=91affb85754203f7b796820a995e1540292bce1e"  -H "Content-Type: application/json" -X POST  -d "{\"state\": \"success\", \"description\": \"Jenkins\", \"target_url\": \"http://10.131.155.89:8080\"}"
                         }
                 }
                 failure {
                         script {
-                                curl "https://api.github.com/ThilakrajKM/spring-petclinic/statuses/$env.GIT_COMMIT?access_token=91affb85754203f7b796820a995e1540292bce1e" \
-                                  -H "Content-Type: application/json" \
-                                  -X POST \
-                                  -d "{\"state\": \"failure\", \"description\": \"Jenkins\", \"target_url\": \"http://10.131.155.89:8080\"}"
+                                curl -k "https://api.github.com/ThilakrajKM/spring-petclinic/statuses/$env.GIT_COMMIT?access_token=91affb85754203f7b796820a995e1540292bce1e"  -H "Content-Type: application/json" -X POST  -d "{\"state\": \"failure\", \"description\": \"Jenkins\", \"target_url\": \"http://10.131.155.89:8080\"}"
                         }
                 }
 	}
