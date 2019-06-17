@@ -33,14 +33,36 @@ pipeline {
 
 	post {
                 success {
-                        //script {
-                                curl -k "https://api.github.com/ThilakrajKM/spring-petclinic/statuses/${env.GIT_COMMIT}?access_token=91affb85754203f7b796820a995e1540292bce1e"  -H "Content-Type: application/json" -X POST  -d "{\"state\": \"success\", \"description\": \"Jenkins\", \"target_url\": \"http://10.131.155.89:8080\"}"
-                        //}
+                        script {
+                                //curl -k "https://api.github.com/ThilakrajKM/spring-petclinic/statuses/${env.GIT_COMMIT}?access_token=91affb85754203f7b796820a995e1540292bce1e"  -H "Content-Type: application/json" -X POST  -d "{\"state\": \"success\", \"description\": \"Jenkins\", \"target_url\": \"http://10.131.155.89:8080\"}"
+                                def ref = env.GIT_COMMIT
+                                def owner = "ThilakrajKM"
+                                def repo = "spring-petclinic"
+
+                                def result = 'success'
+                                def deployStatusBody = '{"state": "' + result + '","target_url": "http://github.com/deploymentlogs"}'
+                                def deployStatusURL = "https://api.github.com/repos/${owner}/${repo}/statuses/${ref}"
+                                def deployStatusResponse = httpRequest authentication: 'Githubuserpwd', httpMode: 'POST', requestBody: deployStatusBody , responseHandle: 'STRING', url: deployStatusURL
+                                if(deployStatusResponse.status != 201) {
+                                        error("Deployment Status API Update Failed: " + deployStatusResponse.status)
+                                }
+                        }
                 }
                 failure {
-                        //script {
-                                curl -k "https://api.github.com/ThilakrajKM/spring-petclinic/statuses/${env.GIT_COMMIT}?access_token=91affb85754203f7b796820a995e1540292bce1e"  -H "Content-Type: application/json" -X POST  -d "{\"state\": \"failure\", \"description\": \"Jenkins\", \"target_url\": \"http://10.131.155.89:8080\"}"
-                        //}
+                        script {
+                                //curl -k "https://api.github.com/ThilakrajKM/spring-petclinic/statuses/${env.GIT_COMMIT}?access_token=91affb85754203f7b796820a995e1540292bce1e"  -H "Content-Type: application/json" -X POST  -d "{\"state\": \"failure\", \"description\": \"Jenkins\", \"target_url\": \"http://10.131.155.89:8080\"}"
+                                def ref = env.GIT_COMMIT
+                                def owner = "ThilakrajKM"
+                                def repo = "spring-petclinic"
+
+                                def result = 'success'
+                                def deployStatusBody = '{"state": "' + result + '","target_url": "http://github.com/deploymentlogs"}'
+                                def deployStatusURL = "https://api.github.com/repos/${owner}/${repo}/statuses/${ref}"
+                                def deployStatusResponse = httpRequest authentication: 'Githubuserpwd', httpMode: 'POST', requestBody: deployStatusBody , responseHandle: 'STRING', url: deployStatusURL
+                                if(deployStatusResponse.status != 201) {
+                                        error("Deployment Status API Update Failed: " + deployStatusResponse.status)
+                                }
+                        }
                 }
 	}
 }
