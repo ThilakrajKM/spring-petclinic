@@ -7,7 +7,7 @@ pipeline {
 	}
   
 	stages {
-		stage('Clean Workspace') {
+		stage('Checkout') {
                           steps {
                                 //sh 'git clean -fdx'
                                   script{
