@@ -18,7 +18,7 @@ pipeline {
                                        echo "********************************"
                                        echo "${env}"
                                        updateGitComitStatus('pending','Build is pending')
-                                          echo "done"
+                                          
                                   }
                           }
 		}
