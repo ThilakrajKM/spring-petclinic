@@ -7,7 +7,7 @@ pipeline {
 	}
   
 	stages {
-		stage('Clean Workspace') {
+		stage('Checkout') {
                           steps {
                                 //sh 'git clean -fdx'
                                   script{
@@ -18,7 +18,8 @@ pipeline {
                                        echo "********************************"
                                        echo "${env}"
                                        updateGitComitStatus('pending','Build is pending')
-                                          echo "done"
+                                       echo "Checkout Complete"
+                                          
                                   }
                           }
 		}
